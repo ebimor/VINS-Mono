@@ -260,7 +260,7 @@ bool Estimator::initialStructure()
         for (auto &it_per_frame : it_per_id.feature_per_frame)
         {
             imu_j++;
-            Vector3d pts_j = it_per_frame.point;
+            Vector3d pts_j = it_per_frame.point; //why point?
             tmp_feature.observation.push_back(make_pair(imu_j, Eigen::Vector2d{pts_j.x(), pts_j.y()}));
         }
         sfm_f.push_back(tmp_feature);
@@ -284,7 +284,7 @@ bool Estimator::initialStructure()
     }
 
     //solve pnp for all frame
-    map<double, ImageFrame>::iterator frame_it;
+    map<double, ImageFrame>::iterator frame_it; //first element is the time stamp
     map<int, Vector3d>::iterator it;
     frame_it = all_image_frame.begin( );
     for (int i = 0; frame_it != all_image_frame.end( ); frame_it++)
