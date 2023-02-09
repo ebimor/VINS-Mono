@@ -178,7 +178,9 @@ void img_callback(const sensor_msgs::ImageConstPtr &img_msg)
                 for (unsigned int j = 0; j < trackerData[i].cur_pts.size(); j++)
                 {
                     double len = std::min(1.0, 1.0 * trackerData[i].track_cnt[j] / WINDOW_SIZE);
-                    cv::circle(tmp_img, trackerData[i].cur_pts[j], 2, cv::Scalar(255 * (1 - len), 0, 255 * len), 2);
+                    //tracked in all previous images, len = 1.0, -> point is shown as red
+                    // not tracked at all, len=0 -> point is show blue
+                    cv::circle(tmp_img, trackerData[i].cur_pts[j], 2, cv::Scalar(255 * (1 - len), 0, 255 * len), 2); //color is shown as BGR in rviz 
                     //draw speed line
                     /*
                     Vector2d tmp_cur_un_pts (trackerData[i].cur_un_pts[j].x, trackerData[i].cur_un_pts[j].y);
